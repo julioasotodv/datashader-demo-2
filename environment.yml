@@ -1,0 +1,16 @@
+channels:
+  - conda-forge
+dependencies:
+  - python=3.7
+  - matplotlib
+  - pandas 
+  - bokeh 
+  - holoviews 
+  - hvplot 
+  - geoviews 
+  - datashader 
+  - colorcet 
+  - panel
+  - pip
+  - pip:
+    - jupyter-server-proxy
