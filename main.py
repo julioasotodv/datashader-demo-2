@@ -1,3 +1,5 @@
+import os
+
 import panel as pn
 import numpy as np
 import pandas as pd
@@ -13,31 +15,9 @@ import colorcet as cc
 hv.extension("bokeh")
 
 # Data:
-datos_airbnb = pd.read_csv("datos_airbnb/listings.csv.bz2", 
-                           sep=",", 
-                           low_memory=False,
-                           usecols=["id", "price", "square_feet", "latitude", "longitude"],
-                           compression="bz2"
+datos_airbnb = pd.read_parquet(os.path.join("datos_airbnb", "airbnb_listings.parquet"), 
+                           engine="fastparquet"
                           )
-
-datos_airbnb["precio diario"] = (datos_airbnb["price"]
-                                 .str.replace("$", "")
-                                 .str.replace(",", "")
-                                 .astype(float)
-                                )
-
-datos_airbnb = datos_airbnb[datos_airbnb["precio diario"] > 0].copy()
-
-coordenadas_google_mercator = (cartopy
-                               .crs
-                               .GOOGLE_MERCATOR                             
-                               .transform_points(src_crs=cartopy.crs.PlateCarree(),
-                                                 x=datos_airbnb["longitude"].values,
-                                                 y=datos_airbnb["latitude"].values)
-                              )
-
-datos_airbnb["long_mercator"] = coordenadas_google_mercator[:,0]
-datos_airbnb["lat_mercator"] = coordenadas_google_mercator[:,1]
 
 # Charts:
 

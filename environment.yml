@@ -3,7 +3,10 @@ channels:
 dependencies:
   - python=3.7
   - matplotlib
-  - pandas 
+  - pandas
+  - fastparquet
+  - dask
+  - distributed
   - bokeh 
   - holoviews 
   - hvplot 
