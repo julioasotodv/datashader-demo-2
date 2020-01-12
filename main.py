@@ -75,8 +75,8 @@ scatter_rasterizado_colorcet.opts(colorbar=True,
 
 tiles_carto_oscuras = gv.tile_sources.CartoDark
 
-antes = (tiles_carto_oscuras * scatter_rasterizado_matplotlib.opts(width=500, height=400))
-despues = (tiles_carto_oscuras * scatter_rasterizado_colorcet.opts(width=500, height=400))
+antes = (tiles_carto_oscuras * scatter_rasterizado_matplotlib.opts(width=700, height=500))
+despues = (tiles_carto_oscuras * scatter_rasterizado_colorcet.opts(width=700, height=500))
 
 doc = hv.renderer("bokeh").server_doc((antes + despues).cols(2))
 
