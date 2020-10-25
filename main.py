@@ -75,10 +75,18 @@ scatter_rasterizado_colorcet.opts(colorbar=True,
 
 tiles_carto_oscuras = gv.tile_sources.CartoDark
 
-antes = (tiles_carto_oscuras * scatter_rasterizado_matplotlib.opts(width=700, height=500))
-despues = (tiles_carto_oscuras * scatter_rasterizado_colorcet.opts(width=700, height=500))
+antes = (tiles_carto_oscuras * scatter_rasterizado_matplotlib).opts(responsive=True)
+despues = (tiles_carto_oscuras * scatter_rasterizado_colorcet).opts(responsive=True)
 
-doc = hv.renderer("bokeh").server_doc((antes + despues).cols(2))
+antes_y_despues = (antes + despues).cols(2)
 
+# Convertir en figura de Bokeh:
+bokeh_renderer = hv.renderer("bokeh").instance(mode='server')
+plot_final_bokeh = bokeh_renderer.get_plot(antes_y_despues).state
+
+# Hacer la figura de bokeh de tamaño responsive:
+plot_final_bokeh.sizing_mode="stretch_both"
+
+# Añadir la figura de Bokeh al documento de Bokeh Server:
+curdoc().add_root(plot_final_bokeh)
 curdoc().title = "Ejemplo Datashader 2"
-
