@@ -70,6 +70,7 @@ scatter_rasterizado_colorcet.opts(colorbar=True,
                                  )
 
 
+
 # Y volvemos a pintar junto con el mapa. Vamos
 # a pintarlos uno encima del otro, para ver mejor las diferencias:
 
